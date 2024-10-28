@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ScoreboardScreen extends StatelessWidget {
-  const ScoreboardScreen({super.key, this.numberOfPlayers});
-  final int? numberOfPlayers;
+class ScoreboardScreen extends StatefulWidget {
+  const ScoreboardScreen({super.key, required this.numberOfPlayers, required this.playerNames});
+  final List<String> playerNames;
+  final int numberOfPlayers;
+
+  @override
+  State<ScoreboardScreen> createState() => _ScoreboardScreenState();
+}
+
+class _ScoreboardScreenState extends State<ScoreboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,9 +17,10 @@ class ScoreboardScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 151, 0, 156),
         title: const Center(
-            child: Text(
-          'Scoreboard Screen',
-        )),
+          child: Text(
+            'Scoreboard Screen',
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -34,29 +42,30 @@ class ScoreboardScreen extends StatelessWidget {
               padding: const EdgeInsets.all(19),
               decoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2)),
               child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Table(
-                    children: [
-                      TableRow(
-                          children: List.generate(
-                        numberOfPlayers!,
-                        (index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 24,
-                              child: Text(
-                                "Player ${index + 1}",
-                                style: const TextStyle(color: Colors.white, fontSize: 13),
-                              ),
+                width: MediaQuery.of(context).size.width,
+                child: Table(
+                  children: [
+                    TableRow(
+                        children: List.generate(
+                      widget.numberOfPlayers,
+                      (index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(2),
+                          child: SizedBox(
+                            width: 50,
+                            child: Text(
+                              widget.playerNames[index],
+                              style: const TextStyle(color: Colors.white, fontSize: 10),
                             ),
-                          );
-                        },
-                      ))
-                    ],
-                  )),
+                          ),
+                        );
+                      },
+                    ))
+                  ],
+                ),
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

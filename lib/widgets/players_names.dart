@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PlayersNames extends StatelessWidget {
-  PlayersNames({super.key});
-  final TextEditingController controller = TextEditingController();
+  const PlayersNames({super.key, required this.controller});
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
