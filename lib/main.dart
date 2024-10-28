@@ -13,7 +13,7 @@ class ScrewApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Navigation Example',
-      initialRoute: AppRoutes.scoreboard,
+      initialRoute: AppRoutes.home,
       routes: AppRoutes.getRoutes(),
     );
   }

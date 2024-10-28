@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ScoreboardScreen extends StatelessWidget {
-  const ScoreboardScreen({super.key});
+  const ScoreboardScreen({super.key, this.numberOfPlayers});
+  final int? numberOfPlayers;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,31 +29,32 @@ class ScoreboardScreen extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Container(
               padding: const EdgeInsets.all(19),
               decoration: BoxDecoration(border: Border.all(color: Colors.red, width: 2)),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: DataTable(columnSpacing: 30, headingRowHeight: 60, columns: const <DataColumn>[
-                  DataColumn(
-                    label: Text("Player 1"),
-                  ),
-                  DataColumn(
-                    label: Text("Player 2"),
-                  )
-                ], rows: const <DataRow>[
-                  DataRow(
-                    cells: <DataCell>[
-                      DataCell(
-                        Text("50"),
-                      ),
-                      DataCell(
-                        Text("25"),
-                      )
+                  width: MediaQuery.of(context).size.width,
+                  child: Table(
+                    children: [
+                      TableRow(
+                          children: List.generate(
+                        numberOfPlayers!,
+                        (index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              width: 24,
+                              child: Text(
+                                "Player ${index + 1}",
+                                style: const TextStyle(color: Colors.white, fontSize: 13),
+                              ),
+                            ),
+                          );
+                        },
+                      ))
                     ],
-                  )
-                ]),
-              ),
+                  )),
             ),
           )
         ],

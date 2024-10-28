@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: List.generate(
                 numberOfPlayers,
                 (index) {
-                  return const PlayersNames();
+                  return PlayersNames();
                 },
               ),
             ),
@@ -88,7 +88,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           TextButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const ScoreboardScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScoreboardScreen(
+                    numberOfPlayers: numberOfPlayers,
+                  ),
+                ),
+              );
             },
             child: const Text('Go to the scoreboard screen'),
           )
